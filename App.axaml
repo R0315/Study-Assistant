@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="StudyAssistant.App"
+             xmlns:local="using:StudyAssistant"
+			 xmlns:converters="clr-namespace:StudyAssistant.Converters;assembly=StudyAssistant"
+			 xmlns:viewmodels="using:StudyAssistant.ViewModels"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+	<Application.Resources>
+		<converters:AuthorToColorConverter x:Key="AuthorToColorConverter"/>
+	</Application.Resources>
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>
