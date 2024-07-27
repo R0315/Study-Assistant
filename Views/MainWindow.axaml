@@ -12,7 +12,7 @@
         Title="StudyAssistant">
 
 	<Window.Styles>
-		<Style Selector="md|MarkdownScrollViewer[Tag=True]">
+		<Style Selector="md|MarkdownScrollViewer.IsLast">
 			<Setter Property="Opacity" Value="0" />
 			<Style.Animations>
 				<Animation Duration="0:0:0.5" FillMode="Forward">
@@ -48,7 +48,7 @@
 								<ColumnDefinition Width="1*" />
 							</Grid.ColumnDefinitions>
 							<Border Grid.Column="1" Background="{Binding Author, Converter={StaticResource AuthorToColorConverter}}" CornerRadius="10" Margin="5" Padding="10">
-								<md:MarkdownScrollViewer Tag="{Binding LastMessage}" Markdown="{Binding Message}" />
+								<md:MarkdownScrollViewer Markdown="{Binding Message}" Classes.IsLast="{Binding LastMessage}" />
 							</Border>
 						</Grid>
 					</DataTemplate>

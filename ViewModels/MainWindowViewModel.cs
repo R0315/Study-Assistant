@@ -29,6 +29,13 @@ namespace StudyAssistant.ViewModels
             set => SetProperty(ref _chatMessages, value);
         }
 
+        private bool _isLastMessage;
+        public bool IsLastMessage
+        {
+            get => _isLastMessage;
+            set => SetProperty(ref _isLastMessage, value);
+        }
+
         private TutorAgent _agent;
         public ICommand SendMessageCommand { get; }
 
@@ -43,6 +50,7 @@ namespace StudyAssistant.ViewModels
         {
             if (!string.IsNullOrEmpty(ChatInput))
             {
+                ChatMessages.ToList().ForEach(message => message.LastMessage = false);
                 ChatMessages.Add(new ChatMessageModel(AuthorType.User, ChatInput));
                 ChatInput = string.Empty;
                 var userMessage = ChatMessages.Last().Message;
@@ -56,8 +64,6 @@ namespace StudyAssistant.ViewModels
                 var response = await _agent.ChatService.GetChatMessageContentAsync(recentHistory, new OpenAIPromptExecutionSettings { Temperature = 0.7 });
                 ChatMessages.Add(new ChatMessageModel(AuthorType.AI, response.ToString(), true));
                 _agent.ChatHistory.AddAssistantMessage(response.ToString());
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                ChatMessages.Last().LastMessage = false;
                 RequestScrollToBottom?.Invoke();
             }
         }
