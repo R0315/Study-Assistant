@@ -60,13 +60,9 @@
 		<Grid Grid.Row="1" Margin="20,0,20,20">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="1*" />
-				<!-- Left empty space -->
 				<ColumnDefinition Width="15*" />
-				<!-- TextBox column -->
 				<ColumnDefinition Width="Auto" />
-				<!-- Button column -->
 				<ColumnDefinition Width="1*" />
-				<!-- Right empty space -->
 			</Grid.ColumnDefinitions>
 
 			<TextBox Name="ChatInputBox"
