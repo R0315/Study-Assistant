@@ -28,7 +28,7 @@
 			</Style.Animations>
 		</Style>
 	</Window.Styles>
-	
+
 	<Grid Background="#191919">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -36,7 +36,7 @@
 		</Grid.RowDefinitions>
 
 		<!-- Chat messages area -->
-		<ScrollViewer x:Name="ChatMessagesScrollViewer" Grid.Row="0" Margin="20,20,20,0">
+		<ScrollViewer x:Name="ChatMessagesScrollViewer" Grid.Row="0" Margin="20,20,20,0" >
 			<ItemsControl ItemsSource="{Binding ChatMessages}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
@@ -48,14 +48,14 @@
 								<ColumnDefinition Width="1*" />
 							</Grid.ColumnDefinitions>
 							<Border Grid.Column="1" Background="{Binding Author, Converter={StaticResource AuthorToColorConverter}}" CornerRadius="10" Margin="5" Padding="10">
-								<md:MarkdownScrollViewer Markdown="{Binding Message}" Classes.IsLast="{Binding LastMessage}" />
+								<md:MarkdownScrollViewer Markdown="{Binding Message}" Classes.IsLast="{Binding LastMessage}" SelectionEnabled="True" />
 							</Border>
 						</Grid>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
-			
+
 		<!-- Chat input area -->
 		<Grid Grid.Row="1" Margin="20,0,20,20">
 			<Grid.ColumnDefinitions>
@@ -75,7 +75,11 @@
                      TextWrapping="Wrap"
                      MaxHeight="100"
                      MinHeight="30"
-                     Text="{Binding ChatInput, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ChatInput, UpdateSourceTrigger=PropertyChanged}" >
+				<TextBox.KeyBindings>
+					<KeyBinding Command="{Binding SendMessageCommand}" Gesture="Enter" />
+				</TextBox.KeyBindings>
+			</TextBox>
 			<Button Content="Send"
 					Background="#676767"
 					Foreground="White"
